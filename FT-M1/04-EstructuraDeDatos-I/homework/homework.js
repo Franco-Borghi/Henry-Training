@@ -15,10 +15,49 @@ Como ejercicio adicional y completamente opcional, al terminar de resolver este 
 */
 
 function nFactorial(n) {
+
+  if (n<=0) {
+    return 'Sólo se puede aplicar factorial a números enteros mayores a 0';
+  }
+
+  if (n==1) {
+    return 1;
+  }
+
+  return n * nFactorial(n-1);
+
 }
 
+// function nFibonacci(n) {
+
+//     if(n==0){return 0;}
+  
+//     if(n==1){return 1;}
+
+//     let arr = [0, 1];
+
+//     for (let index = 1; index < n; index++) {
+//       arr.push((arr[index] + arr[index-1]));
+      
+//     }
+
+//     return (arr[n]);
+
+//   } 
+
+
 function nFibonacci(n) {
-}
+
+  if(n<0){return 'Error';}
+
+  if(n==0){return 0;}
+
+  if(n==1){return 1;}
+
+  return nFibonacci(n-1) + nFibonacci(n-2);
+
+} 
+
 
 /*
 Implementar la clase Queue, sabiendo que es una estructura de tipo FIFO, donde el primer elemento que ingresa es el primero que se quita. Definir los siguientes métodos:
@@ -31,6 +70,25 @@ Pueden utilizar class o función constructora.
 
 function Queue() {
 
+  this.storage = [];
+  this.numberOfSotaregItems = 0;
+
+  this.enqueue = function(value){
+    this.storage.push(value);
+    this.numberOfSotaregItems++;
+  }
+
+  this.dequeue = function(){
+    if(this.numberOfSotaregItems > 0){
+      let toReturn = this.storage.shift();
+      this.numberOfSotaregItems--;
+      return toReturn;
+    }
+  }
+
+  this.size = function(){
+    return this.numberOfSotaregItems
+  }
 }
 
 // No modifiquen nada debajo de esta linea
