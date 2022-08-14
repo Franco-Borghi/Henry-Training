@@ -28,22 +28,22 @@ function nFactorial(n) {
 
 }
 
-// function nFibonacci(n) {
+function nFibonacciOptimizada(n) {
 
-//     if(n==0){return 0;}
+    if(n==0){return 0;}
   
-//     if(n==1){return 1;}
+    if(n==1){return 1;}
 
-//     let arr = [0, 1];
+    let arr = [0, 1];
 
-//     for (let index = 1; index < n; index++) {
-//       arr.push((arr[index] + arr[index-1]));
+    for (let index = 1; index < n; index++) {
+      arr.push((arr[index] + arr[index-1]));
       
-//     }
+    }
 
-//     return (arr[n]);
+    return (arr[n]);
 
-//   } 
+  } 
 
 
 function nFibonacci(n) {
