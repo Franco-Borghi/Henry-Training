@@ -11,38 +11,114 @@ Implementar la clase LinkedList, definiendo los siguientes métodos:
   En caso de que la búsqueda no arroje resultados, search debe retornar null.
 */
 
+function Node(value) {
+  this.value = value;
+  this.next = null;
+}
+
 function LinkedList() {
 
   this.head = null;
-  this.add = () => {
+
+
+
+
+
+  this.add = function(value) {
+
     let node = new Node(value);
 
-    if(!this.head) {
+    let currentNode = this.head;
+
+    if(!this.head){
       this.head = node;
-    } else {
-      function addNext(arg) {
-        if(!arg.next) {
+    } else{
+      let addNext = function(arg){
+        if(!arg.next){
           arg.next = node;
         } else {
           addNext(arg.next);
         }
       }
+      addNext(currentNode);
     }
   }
 
-  this.remove = () => {
 
+
+
+
+  this.remove = function() {
+
+
+    if(!this.head){
+      return null;
+    } else {
+
+      let currentNode = this.head;
+
+      if(!currentNode.next){
+        let value = currentNode.value;
+        this.head = null;
+        return value;
+      } else {
+        while (currentNode.next.next) {
+          currentNode = currentNode.next;
+        }
+        let value = currentNode.next.value;
+        currentNode.next = null;
+        return value;
+      }
+    }
   }
 
-  this.search = () => {
 
+
+
+
+  this.search = function(param) {
+
+    let currentNode = this.head;
+
+    if(!currentNode){
+      return null;
+    } 
+
+    if(param instanceof Function) {
+      if(param(currentNode.value)) {
+        return currentNode.value;
+      } else {
+        while(currentNode.next) {
+          currentNode = currentNode.next;
+          if(param(currentNode.value)){
+            return currentNode.value;
+          }  
+        }
+      }
+      return null;
+    }
+
+    if(!(param instanceof Function)){
+      if(currentNode.value == param) {
+        return currentNode.value;
+      } else {
+        while(currentNode.next) {
+          currentNode = currentNode.next;
+          if(currentNode.value == param){
+            return currentNode.value;
+          }  
+        }
+      }
+      return null;
+      
+    }
   }
+
 }
 
-function Node(value) {
-  this.value = value;
-  this.next = null;
-}
+
+
+
 
 /*
 Implementar la clase HashTable.
@@ -59,8 +135,54 @@ La clase debe tener los siguientes métodos:
 Ejemplo: supongamos que quiero guardar {instructora: 'Ani'} en la tabla. Primero puedo chequear, con hasKey, si ya hay algo en la tabla con el nombre 'instructora'; luego, invocando set('instructora', 'Ani'), se almacenará el par clave-valor en un bucket específico (determinado al hashear la clave)
 */
 
-function HashTable() {}
+class HashTable {
 
+  constructor(){
+    this.buckets = [];
+    for (let index = 0; index < 35; index++) {
+      this.buckets.push({});   
+    }
+    this.numBuckets = this.buckets.length;
+  }
+
+  hash(input){
+    
+    let calc = 0;
+
+    for (let index = 0; index < input.length; index++) {
+      calc = calc + input.charCodeAt(index);
+    }
+    return (calc % this.buckets.length);
+  }
+
+  set(key,value){
+    if(typeof(key) != 'string'){throw new TypeError('Oops!! Error');}
+    let index = this.hash(key);
+    let bucket = this.buckets[index];
+    bucket[key] = value;
+  }
+
+  get(key){
+
+    let index = this.hash(key);
+
+    let bucket = this.buckets[index];
+
+    return bucket[key];
+    
+  }
+
+  hasKey(key){
+    let index = this.hash(key);
+    let bucket = this.buckets[index];
+    if(bucket[key]) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+}
 // No modifiquen nada debajo de esta linea
 // --------------------------------
 
