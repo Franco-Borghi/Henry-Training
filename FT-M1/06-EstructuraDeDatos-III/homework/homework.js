@@ -73,11 +73,56 @@ class BinarySearchTree {
     }
   }
 
-  depthFirstForEach() {
+  // "post-order", "pre-order", o "in-order"
 
+  depthFirstForEach(funct, param) {
+    
+    if(param == 'post-order') {
+      if(this.left){
+        this.left.depthFirstForEach(funct, param);
+      }
+      if(this.right){
+        this.right.depthFirstForEach(funct, param);
+      }
+      funct(this.value);
+    }
+    if(param == "pre-order") {
+      funct(this.value);
+      if(this.left){
+        this.left.depthFirstForEach(funct, param);
+      }
+      if(this.right){
+        this.right.depthFirstForEach(funct, param);
+      }
+    }
+    if((param == 'in-order') || (!param)) {
+      if(this.left){
+        this.left.depthFirstForEach(funct, param);
+      }
+      funct(this.value);
+      if(this.right){
+        this.right.depthFirstForEach(funct, param);
+      }
+
+    }
   }
 
-  breadthFirstForEach() {
+  breadthFirstForEach(cb, memorieArray=[]) {
+
+    
+    
+    if (this.left !== null) {
+      memorieArray.push(this.left);
+    }
+    if (this.right !== null) {
+      memorieArray.push(this.right);
+    }
+
+    cb(this.value);
+
+    if(memorieArray.length > 0){
+      let indexSuprimed = memorieArray.shift();
+      indexSuprimed.breadthFirstForEach(cb, memorieArray);}
 
   }
 
