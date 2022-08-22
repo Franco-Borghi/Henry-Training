@@ -25,7 +25,12 @@ describe('binarySearchTree', function() {
 
   it('toma valores y reporta tamaño correctamente', function () {
     tree.insert(12);
-    expect(tree.size()).toBe(2);
+    tree.insert(13);
+    tree.insert(21);
+    tree.insert(34);
+    tree.insert(33);
+    tree.insert(80);
+    expect(tree.size()).toBe(7);
   });
 
   it('hace nodos en la rama correcta', function () {

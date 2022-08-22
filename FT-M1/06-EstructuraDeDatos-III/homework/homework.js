@@ -17,16 +17,30 @@ class BinarySearchTree {
     this.value = value;
     this.right = null;
     this.left = null;
-    this.length = 1;
+    // this.length = 1;
   }
 
+  // size() {
+  //   return this.length;
+  // }
+
   size() {
-    return this.length;
+    let counter = 0;
+    if(this.value) {
+      if(this.left){
+        counter = counter + this.left.size();
+      }
+      if(this.right){
+        counter = counter + this.right.size();
+      }
+      counter++;
+    }
+    return counter;
   }
 
   insert(value) {
 
-    this.length++;
+    // this.length++;
 
     if(this.value > value) {
       if(this.left === null) {
