@@ -90,7 +90,7 @@ function selectionSort(array, heredable=0) {
   // Tu código:
   let current = array[heredable];
   let min = array[heredable];
-  let i;
+  let i = null;
 
   for (let index = heredable; index < array.length; index++) {
     if (array[index] < min) {
@@ -99,7 +99,7 @@ function selectionSort(array, heredable=0) {
     }  
   }
 
-  if (i != heredable) {
+  if (i != heredable && i != null) {
     array[heredable] = min;
     array[i] = current;
   }
