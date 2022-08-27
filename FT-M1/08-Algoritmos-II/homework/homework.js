@@ -41,33 +41,58 @@ function quickSort(array) {
   return minArray.concat(pivot.concat(maxArray)); // Retorno los 3 arrays concatenados en orden
 }
 
+
+
+
+
+
 function mergeSort(array) {
   // Implementar el método conocido como mergeSort para ordenar de menor a mayor
   // el array recibido como parámetro
   // Devolver el array ordenado resultante
   // Tu código:
 
-  let leftArray;
+  let leftArray= [];
 
-  let rightArray;
+  let rightArray = [];
 
-  let returnArray;
+  let returnArray = [];
 
   if (array.length > 1) {
     leftArray = array.slice(0, Math.floor(array.length / 2));
     rightArray = array.slice(Math.floor(array.length / 2));
+  } else if (array.length == 1) {
+    leftArray.push(array[0]);
   }
 
-  if (leftArray > 1) {
+  if (leftArray.length > 1) {
     leftArray = mergeSort(leftArray);
   }
 
-  if (rightArray > 1) {
+  if (rightArray.length > 1) {
     rightArray = mergeSort(rightArray);
   }
+  
 
-  
-  
+  let loop = (leftArray.length + rightArray.length);
+
+  for (let i = 0; i < loop; i++) {
+    if (leftArray[0] < rightArray[0]) {
+      returnArray.push(leftArray.shift());
+      
+    } else if (rightArray[0] <= leftArray[0]) {
+      returnArray.push(rightArray.shift());
+      
+    } else if (rightArray.length === 0 && leftArray.length !== 0) {
+      returnArray.push(leftArray.shift());
+      
+    } else if (rightArray.length !== 0 && leftArray.length === 0) {
+      returnArray.push(rightArray.shift());
+      
+    }    
+  }
+
+  return returnArray;
 }
 
 // No modificar nada debajo de esta línea
