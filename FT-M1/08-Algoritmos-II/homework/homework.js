@@ -52,30 +52,45 @@ function mergeSort(array) {
   // Devolver el array ordenado resultante
   // Tu código:
 
-  let leftArray= [];
 
+  // Creamos una variable array vacio
+  let leftArray= [];  
+
+  // Creamos una variable array vacio
   let rightArray = [];
 
-  let returnArray = [];
+  // Creamos una variable array vacio, que vamos a retornar al final de nuestra funcion
+  let returnArray = [];   
 
-  if (array.length > 1) {
+
+  // Si el array enviado tiene longitud mayor a 1, lo dividimos y guardamos los valores en leftArray y rightArray, si la longitud es igual a 1, enviamos el elemento a leftArray
+  if (array.length > 1) {  
+
     leftArray = array.slice(0, Math.floor(array.length / 2));
+
     rightArray = array.slice(Math.floor(array.length / 2));
+
   } else if (array.length == 1) {
+
     leftArray.push(array[0]);
+    
   }
 
+
+  //Si tenemos elementos en leftArray, lo dividimos y lo retornamos ordenado, y lo guardamos en leftArray
   if (leftArray.length > 1) {
     leftArray = mergeSort(leftArray);
   }
 
+  //Si tenemos elementos en rightArray, lo dividimos y lo retornamos ordenado, y lo guardamos en rightArray
   if (rightArray.length > 1) {
     rightArray = mergeSort(rightArray);
   }
   
-
+  //Creamos la variable loop, que sera el numero de iteraciones de nuestro ciclo for
   let loop = (leftArray.length + rightArray.length);
 
+  //Ordenamos los arrays separados en un unico array en orden
   for (let i = 0; i < loop; i++) {
     if (leftArray[0] < rightArray[0]) {
       returnArray.push(leftArray.shift());
@@ -92,8 +107,14 @@ function mergeSort(array) {
     }    
   }
 
+  //Retornamos array ordenado
   return returnArray;
 }
+
+
+
+
+
 
 // No modificar nada debajo de esta línea
 // --------------------------------
